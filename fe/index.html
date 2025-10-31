@@ -5,26 +5,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cloblox</title>
 <style>
-/* Reset básico */
+/* Reset e corpo */
 * {margin:0; padding:0; box-sizing:border-box;}
 body {font-family: Arial, sans-serif; background-color: #f5f5f5;}
 
 /* Navbar */
 .navbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #fff;
-    padding: 10px 20px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    position: sticky;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    background-color:#fff;
+    padding:10px 20px;
+    box-shadow:0 2px 4px rgba(0,0,0,0.1);
+    position:sticky;
     top:0;
-    z-index: 100;
+    z-index:100;
 }
 .navbar .logo {font-size:28px; font-weight:bold; color:#fa3c3c;}
 .navbar .menu {display:flex; gap:15px; align-items:center;}
-.navbar .menu a {text-decoration:none; color:#333; font-weight:bold; padding:8px 12px; border-radius:4px; transition: background 0.2s;}
-.navbar .menu a:hover {background-color:#f0f0f0;}
+.navbar .menu a, .navbar .menu button {text-decoration:none; color:#333; font-weight:bold; padding:8px 12px; border-radius:4px; background:none; border:none; cursor:pointer; transition:background 0.2s;}
+.navbar .menu a:hover, .navbar .menu button:hover {background-color:#f0f0f0;}
 .navbar input[type="text"] {padding:6px 10px; border:1px solid #ccc; border-radius:4px;}
 
 /* Container principal */
@@ -49,29 +49,19 @@ body {font-family: Arial, sans-serif; background-color: #f5f5f5;}
 }
 .game-card:hover {transform: scale(1.03);}
 .game-card img {width:100%; height:140px; object-fit:cover;}
-.game-card .info {
-    padding:10px;
-}
+.game-card .info {padding:10px;}
 .game-card .info h3 {font-size:16px; margin-bottom:5px; color:#333;}
 .game-card .info p {font-size:12px; color:#777;}
-
-/* Botão jogar sobre a imagem */
-.game-card button {
-    position: absolute;
-    bottom:10px;
-    left:50%;
-    transform:translateX(-50%);
-    padding:6px 12px;
-    border:none;
-    border-radius:4px;
-    background-color:#3c8cff;
-    color:#fff;
-    font-weight:bold;
-    cursor:pointer;
-    opacity:0;
-    transition: opacity 0.2s;
-}
+.game-card button {position:absolute; bottom:10px; left:50%; transform:translateX(-50%); padding:6px 12px; border:none; border-radius:4px; background-color:#3c8cff; color:#fff; font-weight:bold; cursor:pointer; opacity:0; transition:opacity 0.2s;}
 .game-card:hover button {opacity:1;}
+
+/* Modal Login/Register */
+.modal {display:none; position:fixed; top:0; left:0; width:100%; height:100%; background-color:rgba(0,0,0,0.5); justify-content:center; align-items:center;}
+.modal-content {background-color:#fff; padding:20px; border-radius:10px; width:300px;}
+.modal-content h2 {text-align:center; margin-bottom:15px;}
+.modal-content input {width:100%; padding:8px; margin:5px 0; border:1px solid #ccc; border-radius:5px;}
+.modal-content button {width:100%; padding:8px; margin-top:10px; background-color:#3c8cff; color:white; border:none; border-radius:5px; cursor:pointer;}
+.modal-content button:hover {background-color:#3477e0;}
 
 /* Footer */
 footer {text-align:center; padding:20px; margin-top:30px; background-color:#fff; box-shadow:0 -2px 4px rgba(0,0,0,0.05);}
@@ -82,56 +72,148 @@ footer {text-align:center; padding:20px; margin-top:30px; background-color:#fff;
 <!-- Navbar -->
 <div class="navbar">
     <div class="logo">Cloblox</div>
-    <div class="menu">
-        <a href="#">Jogos</a>
-        <a href="#">Catálogo</a>
-        <a href="#">Grupos</a>
-        <a href="#">Avatar</a>
-        <input type="text" placeholder="Pesquisar">
+    <div class="menu" id="menu">
+        <button id="loginBtn">Login</button>
     </div>
 </div>
 
-<!-- Conteúdo -->
+<!-- Container -->
 <div class="container">
-    <div class="games">
-        <div class="game-card">
-            <img src="https://via.placeholder.com/220x140.png?text=Jogo+1" alt="Jogo 1">
-            <div class="info">
-                <h3>Jogo 1</h3>
-                <p>50.000 jogadores</p>
-            </div>
-            <button>Jogar</button>
-        </div>
-        <div class="game-card">
-            <img src="https://via.placeholder.com/220x140.png?text=Jogo+2" alt="Jogo 2">
-            <div class="info">
-                <h3>Jogo 2</h3>
-                <p>30.000 jogadores</p>
-            </div>
-            <button>Jogar</button>
-        </div>
-        <div class="game-card">
-            <img src="https://via.placeholder.com/220x140.png?text=Jogo+3" alt="Jogo 3">
-            <div class="info">
-                <h3>Jogo 3</h3>
-                <p>10.000 jogadores</p>
-            </div>
-            <button>Jogar</button>
-        </div>
-        <div class="game-card">
-            <img src="https://via.placeholder.com/220x140.png?text=Jogo+4" alt="Jogo 4">
-            <div class="info">
-                <h3>Jogo 4</h3>
-                <p>25.000 jogadores</p>
-            </div>
-            <button>Jogar</button>
-        </div>
+    <div class="games" id="gamesContainer">
+        <!-- Jogos serão carregados aqui -->
     </div>
 </div>
 
-<footer>
-    &copy; 2025 Cloblox. Todos os direitos reservados.
-</footer>
+<!-- Footer -->
+<footer>&copy; 2025 Cloblox. Todos os direitos reservados.</footer>
 
+<!-- Modal Login/Register -->
+<div class="modal" id="authModal">
+    <div class="modal-content">
+        <h2 id="modalTitle">Login</h2>
+        <input type="text" id="usernameInput" placeholder="Username">
+        <input type="password" id="passwordInput" placeholder="Senha">
+        <button id="authActionBtn">Login</button>
+        <p style="text-align:center; margin-top:10px;">
+            <span id="toggleAuth" style="color:blue; cursor:pointer;">Criar conta</span>
+        </p>
+    </div>
+</div>
+
+<script>
+const backendURL = "https://clobloxbenana.onrender.com";
+let token = localStorage.getItem('token') || null;
+let currentUserId = localStorage.getItem('userId') || null;
+
+// Elementos
+const loginBtn = document.getElementById('loginBtn');
+const menu = document.getElementById('menu');
+const authModal = document.getElementById('authModal');
+const modalTitle = document.getElementById('modalTitle');
+const authActionBtn = document.getElementById('authActionBtn');
+const toggleAuth = document.getElementById('toggleAuth');
+const usernameInput = document.getElementById('usernameInput');
+const passwordInput = document.getElementById('passwordInput');
+const gamesContainer = document.getElementById('gamesContainer');
+
+let isLoginMode = true;
+
+// Mostrar modal
+loginBtn.addEventListener('click', () => authModal.style.display='flex');
+toggleAuth.addEventListener('click', () => {
+    isLoginMode = !isLoginMode;
+    modalTitle.innerText = isLoginMode ? 'Login' : 'Registrar';
+    authActionBtn.innerText = isLoginMode ? 'Login' : 'Registrar';
+    toggleAuth.innerText = isLoginMode ? 'Criar conta' : 'Já tenho conta';
+});
+
+// Login / Register
+authActionBtn.addEventListener('click', async () => {
+    const username = usernameInput.value.trim();
+    const password = passwordInput.value.trim();
+    if(!username || !password) return alert('Preencha todos os campos');
+
+    try {
+        let res;
+        if(isLoginMode){
+            res = await fetch(`${backendURL}/login`, {
+                method:'POST',
+                headers:{'Content-Type':'application/json'},
+                body:JSON.stringify({username,password})
+            });
+        } else {
+            res = await fetch(`${backendURL}/register`, {
+                method:'POST',
+                headers:{'Content-Type':'application/json'},
+                body:JSON.stringify({username,password})
+            });
+        }
+        const data = await res.json();
+        if(!res.ok) return alert(data.error);
+        token = data.token || null;
+        currentUserId = data.userId || null;
+        localStorage.setItem('token', token);
+        localStorage.setItem('userId', currentUserId);
+        authModal.style.display='none';
+        setupMenu();
+        loadGames();
+    } catch(e){ console.error(e); alert('Erro de rede'); }
+});
+
+// Setup menu
+function setupMenu(){
+    menu.innerHTML='';
+    if(token){
+        menu.innerHTML = `<span>${usernameInput.value}</span><button id="logoutBtn">Logout</button>`;
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            localStorage.removeItem('token');
+            localStorage.removeItem('userId');
+            token=null; currentUserId=null;
+            setupMenu();
+        });
+    } else {
+        menu.innerHTML = `<button id="loginBtn">Login</button>`;
+        document.getElementById('loginBtn').addEventListener('click', ()=>authModal.style.display='flex');
+    }
+}
+
+// Carregar jogos (exemplo com usuário fixo do Roblox)
+async function loadGames(){
+    gamesContainer.innerHTML='Carregando jogos...';
+    try{
+        // Se o usuário logado tiver ID do Roblox, use-o; se não, usar 1 (exemplo)
+        const userId = currentUserId || 1;
+        const res = await fetch(`${backendURL}/games/${userId}`);
+        const data = await res.json();
+        gamesContainer.innerHTML='';
+        data.data.forEach(game=>{
+            const card = document.createElement('div');
+            card.className='game-card';
+            card.innerHTML=`
+                <img src="https://via.placeholder.com/220x140.png?text=${game.name}" alt="${game.name}">
+                <div class="info">
+                    <h3>${game.name}</h3>
+                    <p>${game.playing} jogadores</p>
+                </div>
+                <button>Jogar</button>
+            `;
+            const btn = card.querySelector('button');
+            btn.addEventListener('click', async () => {
+                if(!token) return alert('Faça login para jogar');
+                await fetch(`${backendURL}/play/${game.id}`, {
+                    method:'POST',
+                    headers:{'Authorization':'Bearer '+token}
+                });
+                alert(`Você começou a jogar ${game.name}`);
+            });
+            gamesContainer.appendChild(card);
+        });
+    } catch(e){ console.error(e); gamesContainer.innerHTML='Erro ao carregar jogos'; }
+}
+
+// Inicialização
+setupMenu();
+loadGames();
+</script>
 </body>
 </html>

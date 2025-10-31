@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cloblox</title>
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+    }
+
+    /* Navbar */
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #242424;
+        color: white;
+        padding: 10px 20px;
+    }
+
+    .navbar .logo {
+        font-weight: bold;
+        font-size: 24px;
+        color: #ff3f3f;
+    }
+
+    .navbar ul {
+        list-style: none;
+        display: flex;
+        gap: 15px;
+        margin: 0;
+        padding: 0;
+    }
+
+    .navbar ul li {
+        cursor: pointer;
+        transition: color 0.2s;
+    }
+
+    .navbar ul li:hover {
+        color: #ff3f3f;
+    }
+
+    /* Container principal */
+    .container {
+        max-width: 1200px;
+        margin: 20px auto;
+        padding: 0 15px;
+    }
+
+    /* Jogos */
+    .games {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+    }
+
+    .game-card {
+        background-color: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        cursor: pointer;
+        transition: transform 0.2s;
+    }
+
+    .game-card:hover {
+        transform: scale(1.05);
+    }
+
+    .game-card img {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+    }
+
+    .game-card .info {
+        padding: 10px;
+    }
+
+    .game-card .info h3 {
+        margin: 0;
+        font-size: 18px;
+    }
+
+    .game-card .info p {
+        margin: 5px 0 0;
+        font-size: 14px;
+        color: #555;
+    }
+
+    /* Footer */
+    footer {
+        text-align: center;
+        padding: 20px;
+        margin-top: 30px;
+        background-color: #242424;
+        color: white;
+    }
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<div class="navbar">
+    <div class="logo">Cloblox</div>
+    <ul>
+        <li>Home</li>
+        <li>Jogos</li>
+        <li>Catálogo</li>
+        <li>Perfil</li>
+    </ul>
+</div>
+
+<!-- Conteúdo -->
+<div class="container">
+    <h2>Jogos Populares</h2>
+    <div class="games">
+        <div class="game-card">
+            <img src="https://via.placeholder.com/200x150.png?text=Jogo+1" alt="Jogo 1">
+            <div class="info">
+                <h3>Jogo 1</h3>
+                <p>50.000 jogadores</p>
+            </div>
+        </div>
+        <div class="game-card">
+            <img src="https://via.placeholder.com/200x150.png?text=Jogo+2" alt="Jogo 2">
+            <div class="info">
+                <h3>Jogo 2</h3>
+                <p>30.000 jogadores</p>
+            </div>
+        </div>
+        <div class="game-card">
+            <img src="https://via.placeholder.com/200x150.png?text=Jogo+3" alt="Jogo 3">
+            <div class="info">
+                <h3>Jogo 3</h3>
+                <p>10.000 jogadores</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer>
+    &copy; 2025 Cloblox. Todos os direitos reservados.
+</footer>
+
+</body>
+</html>

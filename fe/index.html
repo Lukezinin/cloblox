@@ -5,177 +5,76 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cloblox</title>
 <style>
-    body {
-        margin: 0;
-        font-family: 'Arial', sans-serif;
-        background-color: #f5f5f5;
-        color: #333;
-    }
+/* Reset básico */
+* {margin:0; padding:0; box-sizing:border-box;}
+body {font-family: Arial, sans-serif; background-color: #f5f5f5;}
 
-    /* Navbar */
-    .navbar {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        background-color: #fff;
-        padding: 10px 20px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        position: sticky;
-        top: 0;
-        z-index: 100;
-    }
+/* Navbar */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fff;
+    padding: 10px 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    position: sticky;
+    top:0;
+    z-index: 100;
+}
+.navbar .logo {font-size:28px; font-weight:bold; color:#fa3c3c;}
+.navbar .menu {display:flex; gap:15px; align-items:center;}
+.navbar .menu a {text-decoration:none; color:#333; font-weight:bold; padding:8px 12px; border-radius:4px; transition: background 0.2s;}
+.navbar .menu a:hover {background-color:#f0f0f0;}
+.navbar input[type="text"] {padding:6px 10px; border:1px solid #ccc; border-radius:4px;}
 
-    .navbar .logo {
-        font-size: 28px;
-        font-weight: bold;
-        color: #fa3c3c;
-    }
+/* Container principal */
+.container {max-width:1200px; margin:20px auto; padding:0 15px;}
 
-    .navbar .menu {
-        display: flex;
-        gap: 15px;
-        align-items: center;
-    }
+/* Grid de jogos */
+.games {
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap:20px;
+}
 
-    .navbar .menu a {
-        text-decoration: none;
-        color: #333;
-        font-weight: bold;
-        padding: 8px 12px;
-        border-radius: 4px;
-        transition: background 0.2s;
-    }
+/* Card do jogo */
+.game-card {
+    position: relative;
+    background-color: #fff;
+    border-radius:10px;
+    overflow:hidden;
+    box-shadow:0 2px 6px rgba(0,0,0,0.1);
+    cursor:pointer;
+    transition: transform 0.2s;
+}
+.game-card:hover {transform: scale(1.03);}
+.game-card img {width:100%; height:140px; object-fit:cover;}
+.game-card .info {
+    padding:10px;
+}
+.game-card .info h3 {font-size:16px; margin-bottom:5px; color:#333;}
+.game-card .info p {font-size:12px; color:#777;}
 
-    .navbar .menu a:hover {
-        background-color: #e5e5e5;
-    }
+/* Botão jogar sobre a imagem */
+.game-card button {
+    position: absolute;
+    bottom:10px;
+    left:50%;
+    transform:translateX(-50%);
+    padding:6px 12px;
+    border:none;
+    border-radius:4px;
+    background-color:#3c8cff;
+    color:#fff;
+    font-weight:bold;
+    cursor:pointer;
+    opacity:0;
+    transition: opacity 0.2s;
+}
+.game-card:hover button {opacity:1;}
 
-    .navbar input[type="text"] {
-        padding: 6px 10px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-    }
-
-    /* Container */
-    .container {
-        display: flex;
-        max-width: 1200px;
-        margin: 20px auto;
-        gap: 20px;
-        padding: 0 15px;
-    }
-
-    /* Sidebar do usuário */
-    .sidebar {
-        width: 250px;
-        background-color: #fff;
-        border-radius: 10px;
-        padding: 15px;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-        height: fit-content;
-    }
-
-    .sidebar img {
-        width: 80px;
-        border-radius: 50%;
-        display: block;
-        margin: 0 auto;
-    }
-
-    .sidebar h3 {
-        text-align: center;
-        margin: 10px 0 5px;
-    }
-
-    .sidebar p {
-        text-align: center;
-        font-size: 14px;
-        color: #555;
-    }
-
-    .sidebar .sidebar-menu {
-        margin-top: 15px;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .sidebar .sidebar-menu a {
-        text-decoration: none;
-        color: #333;
-        padding: 8px 10px;
-        border-radius: 5px;
-        transition: background 0.2s;
-    }
-
-    .sidebar .sidebar-menu a:hover {
-        background-color: #e5e5e5;
-    }
-
-    /* Área de jogos */
-    .games {
-        flex: 1;
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-        gap: 20px;
-    }
-
-    .game-card {
-        background-color: #fff;
-        border-radius: 10px;
-        overflow: hidden;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-        transition: transform 0.2s;
-    }
-
-    .game-card:hover {
-        transform: scale(1.03);
-    }
-
-    .game-card img {
-        width: 100%;
-        height: 140px;
-        object-fit: cover;
-    }
-
-    .game-card .info {
-        padding: 10px;
-    }
-
-    .game-card .info h3 {
-        margin: 0;
-        font-size: 18px;
-    }
-
-    .game-card .info p {
-        font-size: 13px;
-        color: #777;
-        margin: 5px 0;
-    }
-
-    .game-card button {
-        width: 100%;
-        padding: 8px;
-        border: none;
-        border-radius: 5px;
-        background-color: #3c8cff;
-        color: white;
-        font-weight: bold;
-        cursor: pointer;
-        transition: background 0.2s;
-    }
-
-    .game-card button:hover {
-        background-color: #3477e0;
-    }
-
-    footer {
-        text-align: center;
-        padding: 20px;
-        margin-top: 30px;
-        background-color: #fff;
-        box-shadow: 0 -2px 4px rgba(0,0,0,0.05);
-    }
+/* Footer */
+footer {text-align:center; padding:20px; margin-top:30px; background-color:#fff; box-shadow:0 -2px 4px rgba(0,0,0,0.05);}
 </style>
 </head>
 <body>
@@ -188,27 +87,12 @@
         <a href="#">Catálogo</a>
         <a href="#">Grupos</a>
         <a href="#">Avatar</a>
-        <input type="text" placeholder="Pesquisar...">
+        <input type="text" placeholder="Pesquisar">
     </div>
 </div>
 
 <!-- Conteúdo -->
 <div class="container">
-
-    <!-- Sidebar usuário -->
-    <div class="sidebar">
-        <img src="https://via.placeholder.com/80" alt="Avatar">
-        <h3>Usuário</h3>
-        <p>Online</p>
-        <div class="sidebar-menu">
-            <a href="#">Perfil</a>
-            <a href="#">Amigos</a>
-            <a href="#">Mensagens</a>
-            <a href="#">Configurações</a>
-        </div>
-    </div>
-
-    <!-- Área de jogos -->
     <div class="games">
         <div class="game-card">
             <img src="https://via.placeholder.com/220x140.png?text=Jogo+1" alt="Jogo 1">
@@ -231,6 +115,14 @@
             <div class="info">
                 <h3>Jogo 3</h3>
                 <p>10.000 jogadores</p>
+            </div>
+            <button>Jogar</button>
+        </div>
+        <div class="game-card">
+            <img src="https://via.placeholder.com/220x140.png?text=Jogo+4" alt="Jogo 4">
+            <div class="info">
+                <h3>Jogo 4</h3>
+                <p>25.000 jogadores</p>
             </div>
             <button>Jogar</button>
         </div>
